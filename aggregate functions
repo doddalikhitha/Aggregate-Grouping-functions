@@ -1,0 +1,25 @@
+USE LibraryDB;
+
+-- 1. Count total members
+SELECT COUNT(*) AS total_members FROM Members;
+
+-- 2. Count how many books per category
+SELECT category, COUNT(*) AS total_books
+FROM Books
+GROUP BY category;
+
+-- 3. Average available copies by category
+SELECT category, AVG(available_copies) AS avg_copies
+FROM Books
+GROUP BY category;
+
+-- 4. Total books issued by status
+SELECT status, COUNT(*) AS total_loans
+FROM Loans
+GROUP BY status;
+
+-- 5. Books with more than 2 copies available
+SELECT category, SUM(available_copies) AS total_copies
+FROM Books
+GROUP BY category
+HAVING SUM(available_copies) > 2;
